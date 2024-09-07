@@ -52,9 +52,11 @@ mkdir -p $Environment
 
 # cp -r "$Path" "$Environment/"
 
-find "$Path" -maxdepth 1 -type f -name "*.xml" 
+#find "$Path" -maxdepth 1 -type f -name "*.xml" 
 
 find "$Path" -maxdepth 1 -type f -name "*.xml" -exec cp {} $Environment/ \;
+
+ls "$Environment"
 
 for PathToFile in "$Environment"/*; do
 echo $PathToFile
