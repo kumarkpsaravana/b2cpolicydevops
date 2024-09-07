@@ -41,7 +41,7 @@ jobs:
         run: chmod +x ./artifact/scripts/script.sh
 
       - name: Say Hello World
-        run: echo $env
+        run: echo ${{ env.tenantId }}
 
       - name: Say Hello World
         run: ./artifact/scripts/script.sh dev ./artifact/b2cpolicies
