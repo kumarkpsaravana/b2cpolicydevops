@@ -16,5 +16,8 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v3  # Check out the code in the repository
 
+      - name: Make script executable
+        run: chmod +x ./scripts/script.sh
+
       - name: Say Hello World
         run: ./scripts/script.sh qa $pwd
