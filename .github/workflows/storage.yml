@@ -82,7 +82,7 @@ jobs:
   deploy-qa:
     runs-on: ubuntu-latest
     environment: dev
-    needs: build
+    needs: deploy-dev
     env:
       localEnv: "qa"
     
