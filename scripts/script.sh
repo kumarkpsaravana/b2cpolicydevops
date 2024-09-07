@@ -40,14 +40,14 @@ fi
 
 policySettings=$(echo "$environmentSettings" | jq -r '.PolicySettings')
 
-policySettings=$(echo "$policySettings" | jq '.ProxyIdentityExperienceFrameworkAppId = "$ProxyIdentityExperienceFrameworkAppId" 
-| .IdentityExperienceFrameworkAppId = "$IdentityExperienceFrameworkAppId"
-| .App1B2CExtensionObjectId = "$App1B2CExtensionObjectId"
-| .App1B2CExtensionClientId = "$App1B2CExtensionClientId"
-| .App2B2CExtensionObjectId = "$App2B2CExtensionObjectId"
-| .App2B2CExtensionClientId = "$App2B2CExtensionClientId"
-| .B2CExtAppObjectId = "$B2CExtAppObjectId"
-| .B2CExtAppId = "$B2CExtAppId"
+policySettings=$(echo "$policySettings" | jq '.ProxyIdentityExperienceFrameworkAppId = $ProxyIdentityExperienceFrameworkAppId
+| .IdentityExperienceFrameworkAppId = $IdentityExperienceFrameworkAppId
+| .App1B2CExtensionObjectId = $App1B2CExtensionObjectId
+| .App1B2CExtensionClientId = $App1B2CExtensionClientId
+| .App2B2CExtensionObjectId = $App2B2CExtensionObjectId
+| .App2B2CExtensionClientId = $App2B2CExtensionClientId
+| .B2CExtAppObjectId = "$B2CExtAppObjectId
+| .B2CExtAppId = $B2CExtAppId
 ')
 
 echo $policySettings
