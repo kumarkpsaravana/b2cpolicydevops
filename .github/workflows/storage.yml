@@ -6,9 +6,22 @@ on:
       - main
 
 jobs:
-  upload_to_blob:
+  build:
+    runs-on: ubuntu-latest  # The environment where the action runs
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3  # Check out the code in the repository
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: ./htmltemplates   
+  deploy-dev:
     runs-on: ubuntu-latest
     environment: dev
+    needs: build
     
     steps:
     # Checkout the repository to get access to the files to be uploaded
@@ -31,5 +44,5 @@ jobs:
         az storage blob upload-batch \
           --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
           --destination ${{ secrets.AZURE_STORAGE_CONTAINER }} \
-          --source ./htmltemplates \
+          --source ./artifact \
           --auth-mode key
