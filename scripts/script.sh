@@ -24,6 +24,8 @@ if ! [ -x "$(command -v jq)" ]; then
     exit 1
 fi
 
+echo $App1B2CExtensionClientId
+
 # Read application settings from appsettings.json
 if ! [ -f $Path/"appsettings.json" ]; then
     echo "appsettings.json not found!"
