@@ -50,6 +50,6 @@ jobs:
         uses: azure-ad-b2c/deploy-trustframework-policy@v3
         with:
           folder: "./dev"
-          tenant: ${{ env.tenant }}
+          tenant: ${{ env.tenantId }}
           clientId: ${{ env.clientId }}
           clientSecret: ${{ secrets.clientSecret }}
