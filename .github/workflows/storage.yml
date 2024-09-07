@@ -44,5 +44,5 @@ jobs:
         az storage blob upload-batch \
           --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
           --destination ${{ secrets.AZURE_STORAGE_CONTAINER }} \
-          --source ./artifact \
+          --source . \
           --auth-mode key
