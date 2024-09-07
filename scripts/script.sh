@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if the correct number of arguments are provided
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 10 ]; then
     echo "Usage: $0 <Environment> <Path> <App1B2CExtensionClientId> <App1B2CExtensionObjectId> <App2B2CExtensionClientId> <App2B2CExtensionObjectId> <B2CExtAppId> <B2CExtAppObjectId> <IdentityExperienceFrameworkAppId> <ProxyIdentityExperienceFrameworkAppId> }}"
     exit 1
 fi
