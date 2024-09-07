@@ -29,6 +29,7 @@ jobs:
   hello-world-dev:
     runs-on: ubuntu-latest
     environment: dev
+    needs: say-hello
     steps:
       # Step 1: Checkout the code
       - name: Download Hello World artifact
