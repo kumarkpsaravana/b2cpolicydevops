@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  say-hello:
+  build:
     runs-on: ubuntu-latest  # The environment where the action runs
 
     steps:
@@ -26,10 +26,10 @@ jobs:
         with:
           name: build-artifacts
           path: . 
-  hello-world-dev:
+  dev-deploy:
     runs-on: ubuntu-latest
     environment: dev
-    needs: say-hello
+    needs: build
     steps:
       # Step 1: Checkout the code
       - name: Download Hello World artifact
