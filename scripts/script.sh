@@ -28,7 +28,7 @@ fi
 
 # Read appsettings.json and extract the environment-specific settings
 applicationSettings=$(cat $Path/appsettings.json)
-environmentSettings=$(echo "$applicationSettings" | jq --arg env "motodigi" '.Environments[] | select(.Name == $env)')
+environmentSettings=$(echo "$applicationSettings" | jq --arg env "al" '.Environments[] | select(.Name == $env)')
 if [ -z "$environmentSettings" ]; then
     echo "No settings found for environment $Environment"
     exit 1
