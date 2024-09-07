@@ -16,10 +16,6 @@ if ! [ -x "$(command -v jq)" ]; then
     exit 1
 fi
 
-echo "Listing files in /path/to/directory:"
-ls b2cpolicies -a
-
-
 # Read application settings from appsettings.json
 if ! [ -f $Path/"appsettings.json" ]; then
     echo "appsettings.json not found!"
