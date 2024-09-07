@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     needs: build
+    env:
+      localEnv: "dev"
     
     steps:
     # Checkout the repository to get access to the files to be uploaded
@@ -30,6 +32,40 @@ jobs:
       with:
         name: build-artifacts
         path: ./artifact
+    - name: Transform Files
+      run: |
+        # Define the folder containing HTML files and the search/replace text
+        FOLDER="./artifact"
+        OLD_TEXT="diezbc2storage.blob.core.windows.net"
+        NEW_TEXT="demosa.blob.core.windows.net"
+
+        # Find all .html files in the folder and replace OLD_TEXT with NEW_TEXT
+        find $FOLDER -name "*.html" -exec sed -i "s/$OLD_TEXT/$NEW_TEXT/g" {} +
+    - name: Rename Js file
+      run: |
+        # Define the current file name and new file name
+        current_file="script-$localEnv.txt"
+        new_file="script.js"
+
+        echo current_file
+
+        # Use the mv command to rename the file
+        if [ -f "$current_file" ]; then
+          mv "$current_file" "$new_file"
+          echo "File renamed from $current_file to $new_file"
+        else
+          echo "File $current_file does not exist"
+        fi
+    - name: Rename Js file
+      run: |
+        # Define the string to search for in the file names
+        search_string="script**.js"
+
+        # Use the find command to search for files and delete them
+        find . -type f -name "$search_string" 
+        find . -type f -name "$search_string" -exec rm -f {} \;
+
+        echo "Files containing '$search_string' have been deleted."
 
     # Log in to Azure CLI
     - name: Login to Azure
@@ -49,3 +85,4 @@ jobs:
           --destination ${{ secrets.AZURE_STORAGE_CONTAINER }} \
           --source ./artifact \
           --auth-mode key
+          --overwrite true
