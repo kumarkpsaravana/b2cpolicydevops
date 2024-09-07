@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # Triggers the action when there's a push to the main branch
+    paths:
+      - 'b2cpolicies/**' 
   pull_request:  # Also runs on pull requests
     branches:
       - main
