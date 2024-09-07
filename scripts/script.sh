@@ -63,7 +63,7 @@ echo $PathToFile
 
     echo "$policySettings" | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while IFS="=" read -r key value; do
     value=$(printf '%s\n' "$value" | sed 's/[\/&]/\\&/g')
-        sed -i '' "s/{Settings:$key}/$value/g" $PathToFile
+        sed -i "s/{Settings:$key}/$value/g" $PathToFile
     done
   fi
 done

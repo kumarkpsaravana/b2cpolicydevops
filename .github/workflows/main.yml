@@ -21,3 +21,8 @@ jobs:
 
       - name: Say Hello World
         run: ./scripts/script.sh qa b2cpolicies
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: qa
