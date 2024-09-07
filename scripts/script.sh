@@ -24,8 +24,6 @@ if ! [ -x "$(command -v jq)" ]; then
     exit 1
 fi
 
-echo $App1B2CExtensionClientId
-
 # Read application settings from appsettings.json
 if ! [ -f $Path/"appsettings.json" ]; then
     echo "appsettings.json not found!"
@@ -58,9 +56,6 @@ policySettings=$(echo "$policySettings" | jq --arg newProxyIdentityExperienceFra
                                               .App2B2CExtensionClientId = $newApp2B2CExtensionClientId |
                                               .B2CExtAppObjectId = $newB2CExtAppObjectId |
                                               .B2CExtAppId = $newB2CExtAppId')
-
-
-echo $policySettings
 
 mkdir -p $Environment
 

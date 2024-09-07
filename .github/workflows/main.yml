@@ -1,4 +1,4 @@
-name: Hello World Workflow
+name: B2C Custom Policy Deployment
 
 on:
   push:
@@ -16,11 +16,6 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v3  # Check out the code in the repository
 
-      # - name: Make script executable
-      #   run: chmod +x ./scripts/script.sh
-
-      # - name: Say Hello World
-      #   run: ./scripts/script.sh qa b2cpolicies
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -40,16 +35,38 @@ jobs:
       - name: Make script executable
         run: chmod +x ./artifact/scripts/script.sh
 
-      - name: Say Hello World
-        run: echo "${{ vars.clientId }}"
-
-      - name: Say Hello World
+      - name: Transform B2C Policy fil
         run: ./artifact/scripts/script.sh dev ./artifact/b2cpolicies ${{ vars.App1B2CExtensionClientId }} ${{ vars.App1B2CExtensionObjectId }} ${{ vars.App2B2CExtensionClientId }} ${{ vars.App2B2CExtensionObjectId }} ${{ vars.B2CExtAppId }} ${{ vars.B2CExtAppObjectId }} ${{ vars.IdentityExperienceFrameworkAppId }} ${{ vars.ProxyIdentityExperienceFrameworkAppId }}
 
-      - name: 'Upload TrustFrameworkBase Policy'
+      - name: 'Upload B2C Policy'
         uses: azure-ad-b2c/deploy-trustframework-policy@v3
         with:
           folder: "./dev"
+          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,SignInapp2.xml"
+          tenant: ${{ vars.tenant }}
+          clientId: ${{ vars.clientId }}
+          clientSecret: ${{ vars.clientSecret }}
+  qa-deploy:
+    runs-on: ubuntu-latest
+    environment: qa
+    needs: dev
+    steps:
+      # Step 1: Checkout the code
+      - name: Download Hello World artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+          path: ./artifact
+      - name: Make script executable
+        run: chmod +x ./artifact/scripts/script.sh
+
+      - name: Transform B2C Policy fil
+        run: ./artifact/scripts/script.sh qa ./artifact/b2cpolicies ${{ vars.App1B2CExtensionClientId }} ${{ vars.App1B2CExtensionObjectId }} ${{ vars.App2B2CExtensionClientId }} ${{ vars.App2B2CExtensionObjectId }} ${{ vars.B2CExtAppId }} ${{ vars.B2CExtAppObjectId }} ${{ vars.IdentityExperienceFrameworkAppId }} ${{ vars.ProxyIdentityExperienceFrameworkAppId }}
+
+      - name: 'Upload B2C Policy'
+        uses: azure-ad-b2c/deploy-trustframework-policy@v3
+        with:
+          folder: "./qa"
           files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,SignInapp2.xml"
           tenant: ${{ vars.tenant }}
           clientId: ${{ vars.clientId }}
