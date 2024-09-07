@@ -59,12 +59,11 @@ find "$Path" -maxdepth 1 -type f -name "*.xml" -exec cp {} $Environment/ \;
 ls "$Environment"
 
 for PathToFile in "$Environment"/*; do
-echo $PathToFile
   if [ -f "$PathToFile" ]; then  # Check if it is a file
-    echo "Processing XML file: $file"
+    echo "Processing XML file: $PathToFile"
     # Replace placeholders with environment settings
     tenant=$(echo "$environmentSettings" | jq -r '.Tenant')
-    sed -i '' "s/{Settings:Tenant}/$tenant/g" $PathToFile
+    sed -i "s/{Settings:Tenant}/$tenant/g" $PathToFile
 
     echo "$policySettings" | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while IFS="=" read -r key value; do
     value=$(printf '%s\n' "$value" | sed 's/[\/&]/\\&/g')
