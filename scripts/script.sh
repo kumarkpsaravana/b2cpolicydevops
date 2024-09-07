@@ -17,7 +17,7 @@ if ! [ -x "$(command -v jq)" ]; then
 fi
 
 echo "Listing files in /path/to/directory:"
-ls $Path
+ls 
 
 
 # Read application settings from appsettings.json
