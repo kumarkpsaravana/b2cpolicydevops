@@ -44,7 +44,7 @@ jobs:
     - name: Rename Js file
       run: |
         # Define the current file name and new file name
-        current_file="script-$localEnv.txt"
+        current_file="script-$localEnv.js"
         new_file="script.js"
 
         echo current_file
@@ -85,4 +85,4 @@ jobs:
           --destination ${{ secrets.AZURE_STORAGE_CONTAINER }} \
           --source ./artifact \
           --auth-mode key
-          --overwrite true
+          --overwrite
