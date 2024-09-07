@@ -44,8 +44,8 @@ jobs:
     - name: Rename Js file
       run: |
         # Define the current file name and new file name
-        current_file="script-$localEnv.js"
-        new_file="script.js"
+        current_file="./artifact/script-$localEnv.js"
+        new_file="./artifact/script.js"
 
         echo current_file
 
@@ -59,7 +59,7 @@ jobs:
     - name: Rename Js file
       run: |
         # Define the string to search for in the file names
-        search_string="script**.js"
+        search_string="./artifact/script**.js"
 
         # Use the find command to search for files and delete them
         find . -type f -name "$search_string" 
@@ -84,5 +84,5 @@ jobs:
           --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
           --destination ${{ secrets.AZURE_STORAGE_CONTAINER }} \
           --source ./artifact \
-          --auth-mode key
+          --auth-mode key \
           --overwrite
