@@ -49,7 +49,7 @@ jobs:
       - name: 'Upload TrustFrameworkBase Policy'
         uses: azure-ad-b2c/deploy-trustframework-policy@v3
         with:
-          folder: "./artifact/dev"
+          folder: "./dev"
           tenant: ${{ env.tenant }}
           clientId: ${{ env.clientId }}
           clientSecret: ${{ secrets.clientSecret }}
