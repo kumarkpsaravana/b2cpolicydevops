@@ -41,7 +41,7 @@ jobs:
         run: chmod +x ./artifact/scripts/script.sh
 
       - name: Say Hello World
-        run: echo "$vars.clientId"
+        run: echo "${{ vars.clientId }}"
 
       - name: Say Hello World
         run: ./artifact/scripts/script.sh dev ./artifact/b2cpolicies
@@ -50,7 +50,7 @@ jobs:
         uses: azure-ad-b2c/deploy-trustframework-policy@v3
         with:
           folder: "./dev"
-          files: "TrustFrameworkBase.xml"
+          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,SignInapp2.xml"
           tenant: ${{ vars.tenant }}
           clientId: ${{ vars.clientId }}
           clientSecret: ${{ vars.clientSecret }}
