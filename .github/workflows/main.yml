@@ -27,7 +27,7 @@ jobs:
     needs: build
     steps:
       # Step 1: Checkout the code
-      - name: Download Hello World artifact
+      - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: build-artifacts
@@ -35,7 +35,7 @@ jobs:
       - name: Make script executable
         run: chmod +x ./artifact/scripts/script.sh
 
-      - name: Transform B2C Policy fil
+      - name: Transform B2C Policy file
         run: ./artifact/scripts/script.sh dev ./artifact/b2cpolicies ${{ vars.App1B2CExtensionClientId }} ${{ vars.App1B2CExtensionObjectId }} ${{ vars.App2B2CExtensionClientId }} ${{ vars.App2B2CExtensionObjectId }} ${{ vars.B2CExtAppId }} ${{ vars.B2CExtAppObjectId }} ${{ vars.IdentityExperienceFrameworkAppId }} ${{ vars.ProxyIdentityExperienceFrameworkAppId }}
 
       - name: 'Upload B2C Policy'
@@ -52,7 +52,7 @@ jobs:
     needs: dev-deploy
     steps:
       # Step 1: Checkout the code
-      - name: Download Hello World artifact
+      - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: build-artifacts
@@ -60,7 +60,7 @@ jobs:
       - name: Make script executable
         run: chmod +x ./artifact/scripts/script.sh
 
-      - name: Transform B2C Policy fil
+      - name: Transform B2C Policy file
         run: ./artifact/scripts/script.sh qa ./artifact/b2cpolicies ${{ vars.App1B2CExtensionClientId }} ${{ vars.App1B2CExtensionObjectId }} ${{ vars.App2B2CExtensionClientId }} ${{ vars.App2B2CExtensionObjectId }} ${{ vars.B2CExtAppId }} ${{ vars.B2CExtAppObjectId }} ${{ vars.IdentityExperienceFrameworkAppId }} ${{ vars.ProxyIdentityExperienceFrameworkAppId }}
 
       - name: 'Upload B2C Policy'
