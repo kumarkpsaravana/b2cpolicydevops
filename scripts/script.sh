@@ -43,21 +43,22 @@ fi
 policySettings=$(echo "$environmentSettings" | jq -r '.PolicySettings')
 
 policySettings=$(echo "$policySettings" | jq --arg newProxyIdentityExperienceFrameworkAppId "$ProxyIdentityExperienceFrameworkAppId" \
---arg newProxyIdentityExperienceFrameworkAppId "$IdentityExperienceFrameworkAppId" \
---arg newApp1B2CExtensionObjectId "$App1B2CExtensionObjectId" \
---arg newApp1B2CExtensionObjectId "$App1B2CExtensionObjectId" \
---arg newApp2B2CExtensionObjectId "$App2B2CExtensionObjectId" \
---arg newApp2B2CExtensionClientId "$App2B2CExtensionClientId" \
---arg newB2CExtAppObjectIdd "$B2CExtAppObjectId" \
---arg newB2CExtAppId "$B2CExtAppId" \
-'.ProxyIdentityExperienceFrameworkAppId = $newProxyIdentityExperienceFrameworkAppId
-| .IdentityExperienceFrameworkAppId = $newIdentityExperienceFrameworkAppId
-| .App1B2CExtensionObjectId = $newApp1B2CExtensionObjectId
-| .App1B2CExtensionClientId = $newApp1B2CExtensionObjectId
-| .App2B2CExtensionObjectId = $newApp2B2CExtensionObjectId
-| .App2B2CExtensionClientId = $newApp2B2CExtensionClientId
-| .B2CExtAppObjectId = "$newB2CExtAppObjectId
-| .B2CExtAppId = $newB2CExtAppId')
+                                             --arg newIdentityExperienceFrameworkAppId "$IdentityExperienceFrameworkAppId" \
+                                             --arg newApp1B2CExtensionObjectId "$App1B2CExtensionObjectId" \
+                                             --arg newApp1B2CExtensionClientId "$App1B2CExtensionClientId" \
+                                             --arg newApp2B2CExtensionObjectId "$App2B2CExtensionObjectId" \
+                                             --arg newApp2B2CExtensionClientId "$App2B2CExtensionClientId" \
+                                             --arg newB2CExtAppObjectId "$B2CExtAppObjectId" \
+                                             --arg newB2CExtAppId "$B2CExtAppId" \
+                                             '.ProxyIdentityExperienceFrameworkAppId = $newProxyIdentityExperienceFrameworkAppId |
+                                              .IdentityExperienceFrameworkAppId = $newIdentityExperienceFrameworkAppId |
+                                              .App1B2CExtensionObjectId = $newApp1B2CExtensionObjectId |
+                                              .App1B2CExtensionClientId = $newApp1B2CExtensionClientId |
+                                              .App2B2CExtensionObjectId = $newApp2B2CExtensionObjectId |
+                                              .App2B2CExtensionClientId = $newApp2B2CExtensionClientId |
+                                              .B2CExtAppObjectId = $newB2CExtAppObjectId |
+                                              .B2CExtAppId = $newB2CExtAppId')
+
 
 echo $policySettings
 
