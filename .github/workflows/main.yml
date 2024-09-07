@@ -20,4 +20,4 @@ jobs:
         run: chmod +x ./scripts/script.sh
 
       - name: Say Hello World
-        run: ./scripts/script.sh qa /b2cpolicies
+        run: ./scripts/script.sh qa b2cpolicies
