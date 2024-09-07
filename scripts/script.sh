@@ -57,8 +57,7 @@ policySettings=$(echo "$policySettings" | jq --arg newProxyIdentityExperienceFra
 | .App2B2CExtensionObjectId = $newApp2B2CExtensionObjectId
 | .App2B2CExtensionClientId = $newApp2B2CExtensionClientId
 | .B2CExtAppObjectId = "$newB2CExtAppObjectId
-| .B2CExtAppId = $newB2CExtAppId
-')
+| .B2CExtAppId = $newB2CExtAppId')
 
 echo $policySettings
 
