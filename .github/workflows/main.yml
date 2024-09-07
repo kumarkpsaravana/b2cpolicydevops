@@ -16,13 +16,13 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v3  # Check out the code in the repository
 
-      - name: Make script executable
-        run: chmod +x ./scripts/script.sh
+      # - name: Make script executable
+      #   run: chmod +x ./scripts/script.sh
 
-      - name: Say Hello World
-        run: ./scripts/script.sh qa b2cpolicies
+      # - name: Say Hello World
+      #   run: ./scripts/script.sh qa b2cpolicies
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
-          path: qa
+          path: b2cpolicydevops
