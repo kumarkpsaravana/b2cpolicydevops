@@ -2,13 +2,21 @@
 
 # Check if the correct number of arguments are provided
 if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <Environment> <Path>"
+    echo "Usage: $0 <Environment> <Path> <App1B2CExtensionClientId> <App1B2CExtensionObjectId> <App2B2CExtensionClientId> <App2B2CExtensionObjectId> <B2CExtAppId> <B2CExtAppObjectId> <IdentityExperienceFrameworkAppId> <ProxyIdentityExperienceFrameworkAppId> }}"
     exit 1
 fi
 
 # Assign parameters
 Environment=$1
 Path=$2
+App1B2CExtensionClientId=$3
+App1B2CExtensionObjectId=$4
+App2B2CExtensionClientId=$5
+App2B2CExtensionObjectId=$6
+B2CExtAppId=$7
+B2CExtAppObjectId=$8
+IdentityExperienceFrameworkAppId=$9
+ProxyIdentityExperienceFrameworkAppId=$10
 
 # Ensure jq is installed for JSON parsing
 if ! [ -x "$(command -v jq)" ]; then
@@ -32,14 +40,14 @@ fi
 
 policySettings=$(echo "$environmentSettings" | jq -r '.PolicySettings')
 
-policySettings=$(echo "$policySettings" | jq '.ProxyIdentityExperienceFrameworkAppId = "Jane Smith" 
-| .IdentityExperienceFrameworkAppId = "demo 1"
-| .App1B2CExtensionObjectId = "demo 1"
-| .App1B2CExtensionClientId = "demo 2"
-| .App2B2CExtensionObjectId = "demo 3"
-| .App2B2CExtensionClientId = "demo 4"
-| .B2CExtAppObjectId = "demo 5"
-| .B2CExtAppId = "demo 2333"
+policySettings=$(echo "$policySettings" | jq '.ProxyIdentityExperienceFrameworkAppId = "$ProxyIdentityExperienceFrameworkAppId" 
+| .IdentityExperienceFrameworkAppId = "$IdentityExperienceFrameworkAppId"
+| .App1B2CExtensionObjectId = "$App1B2CExtensionObjectId"
+| .App1B2CExtensionClientId = "$App1B2CExtensionClientId"
+| .App2B2CExtensionObjectId = "$App2B2CExtensionObjectId"
+| .App2B2CExtensionClientId = "$App2B2CExtensionClientId"
+| .B2CExtAppObjectId = "$B2CExtAppObjectId"
+| .B2CExtAppId = "$B2CExtAppId"
 ')
 
 echo $policySettings
