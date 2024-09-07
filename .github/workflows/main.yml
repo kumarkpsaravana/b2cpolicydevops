@@ -25,4 +25,19 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
-          path: .
+          path: . 
+  hello-world-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      # Step 1: Checkout the code
+      - name: Download Hello World artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+          path: ./artifact
+      - name: Make script executable
+        run: chmod +x ./artifact/scripts/script.sh
+
+      - name: Say Hello World
+        run: ./scripts/script.sh dev ./artifact/b2cpolicies
