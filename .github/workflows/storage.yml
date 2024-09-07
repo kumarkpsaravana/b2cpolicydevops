@@ -58,7 +58,7 @@ jobs:
         fi
     - name: Delete Js file
       run: |
-        rm ./artifact/script*.js
+        rm ./artifact/script-*.js
 
     # Log in to Azure CLI
     - name: Login to Azure
