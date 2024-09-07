@@ -49,7 +49,7 @@ jobs:
   qa-deploy:
     runs-on: ubuntu-latest
     environment: qa
-    needs: dev
+    needs: dev-deploy
     steps:
       # Step 1: Checkout the code
       - name: Download Hello World artifact
