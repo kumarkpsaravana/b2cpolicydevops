@@ -44,4 +44,4 @@ jobs:
         run: ls -a
 
       - name: Say Hello World
-        run: ./scripts/script.sh dev ./artifact/b2cpolicies
+        run: ./artifact/scripts/script.sh dev ./artifact/b2cpolicies
