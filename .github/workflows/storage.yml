@@ -79,3 +79,64 @@ jobs:
           --source ./artifact \
           --auth-mode key \
           --overwrite
+  deploy-qa:
+    runs-on: ubuntu-latest
+    environment: dev
+    needs: build
+    env:
+      localEnv: "qa"
+    
+    steps:
+    # Checkout the repository to get access to the files to be uploaded
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: build-artifacts
+        path: ./artifact
+    - name: Transform Files
+      run: |
+        # Define the folder containing HTML files and the search/replace text
+        FOLDER="./artifact"
+        OLD_TEXT="diezbc2storage.blob.core.windows.net"
+        NEW_TEXT="demosa.blob.core.windows.net"
+
+        # Find all .html files in the folder and replace OLD_TEXT with NEW_TEXT
+        find $FOLDER -name "*.html" -exec sed -i "s/$OLD_TEXT/$NEW_TEXT/g" {} +
+    - name: Rename Js file
+      run: |
+        # Define the current file name and new file name
+        current_file="./artifact/script-$localEnv.js"
+        new_file="./artifact/script.js"
+
+        echo current_file
+
+        # Use the mv command to rename the file
+        if [ -f "$current_file" ]; then
+          mv "$current_file" "$new_file"
+          echo "File renamed from $current_file to $new_file"
+        else
+          echo "File $current_file does not exist"
+        fi
+    - name: Delete Js file
+      run: |
+        rm ./artifact/script-*.js
+
+    # Log in to Azure CLI
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    # Upload files to Azure Blob Storage
+    - name: Upload files to Azure Blob Storage
+      run: |
+        # Install the Azure CLI Storage module
+        az extension add --name storage-preview
+
+        # Upload the file to the blob container
+        az storage blob upload-batch \
+          --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
+          --destination ${{ secrets.AZURE_STORAGE_CONTAINER }} \
+          --source ./artifact \
+          --auth-mode key \
+          --overwrite
