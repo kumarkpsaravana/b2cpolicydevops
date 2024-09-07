@@ -8,6 +8,7 @@ on:
 jobs:
   upload_to_blob:
     runs-on: ubuntu-latest
+    environment: dev
     
     steps:
     # Checkout the repository to get access to the files to be uploaded
