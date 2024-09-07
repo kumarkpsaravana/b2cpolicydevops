@@ -44,7 +44,7 @@ jobs:
         run: echo "${{ vars.clientId }}"
 
       - name: Say Hello World
-        run: ./artifact/scripts/script.sh dev ./artifact/b2cpolicies {{ $vars.App1B2CExtensionClientId }},{{ $vars.App1B2CExtensionObjectId }},{{ $vars.App2B2CExtensionClientId }},{{ $vars.App2B2CExtensionObjectId }},{{ $vars.B2CExtAppId }},{{ $vars.B2CExtAppObjectId }},{{ $vars.IdentityExperienceFrameworkAppId }},{{ $vars.ProxyIdentityExperienceFrameworkAppId }}
+        run: ./artifact/scripts/script.sh dev ./artifact/b2cpolicies {{ $vars.App1B2CExtensionClientId }} {{ $vars.App1B2CExtensionObjectId }} {{ $vars.App2B2CExtensionClientId }} {{ $vars.App2B2CExtensionObjectId }} {{ $vars.B2CExtAppId }} {{ $vars.B2CExtAppObjectId }} {{ $vars.IdentityExperienceFrameworkAppId }} {{ $vars.ProxyIdentityExperienceFrameworkAppId }}
 
       - name: 'Upload TrustFrameworkBase Policy'
         uses: azure-ad-b2c/deploy-trustframework-policy@v3
