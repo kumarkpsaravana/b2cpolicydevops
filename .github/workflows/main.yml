@@ -35,7 +35,8 @@ jobs:
           name: build-artifacts
           path: ./artifact
       - name: Make script executable
-        run: chmod +x ./artifact/scripts/script.sh
+        run: chmod +x ./artifact/scripts/script.sh \
+              chmod +x ./artifact/scripts/policy.sh
 
       - name: Transform B2C Policy file
         run: ./artifact/scripts/script.sh dev ./artifact/b2cpolicies ${{ vars.App1B2CExtensionClientId }} ${{ vars.App1B2CExtensionObjectId }} ${{ vars.App2B2CExtensionClientId }} ${{ vars.App2B2CExtensionObjectId }} ${{ vars.B2CExtAppId }} ${{ vars.B2CExtAppObjectId }} ${{ vars.IdentityExperienceFrameworkAppId }} ${{ vars.ProxyIdentityExperienceFrameworkAppId }}
