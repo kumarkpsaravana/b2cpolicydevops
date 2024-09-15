@@ -45,7 +45,7 @@ jobs:
       - name: Deploy B2C Policy file
         run: ./artifact/scripts/policy.sh ${{ vars.clientId }} ${{ vars.clientSecret }} ${{ vars.tenant }} B2C_1A_AL_TrustFrameworkBase ./dev/TrustFrameworkBase.xml
 
-      # - name: 'Upload B2C Policy'
+      # - name: 'Upload B2C  Policy'
       #   uses: azure-ad-b2c/deploy-trustframework-policy@v3
       #   with:
       #     folder: "./dev"
