@@ -40,14 +40,17 @@ jobs:
       - name: Transform B2C Policy file
         run: ./artifact/scripts/script.sh dev ./artifact/b2cpolicies ${{ vars.App1B2CExtensionClientId }} ${{ vars.App1B2CExtensionObjectId }} ${{ vars.App2B2CExtensionClientId }} ${{ vars.App2B2CExtensionObjectId }} ${{ vars.B2CExtAppId }} ${{ vars.B2CExtAppObjectId }} ${{ vars.IdentityExperienceFrameworkAppId }} ${{ vars.ProxyIdentityExperienceFrameworkAppId }}
 
-      - name: 'Upload B2C Policy'
-        uses: azure-ad-b2c/deploy-trustframework-policy@v3
-        with:
-          folder: "./dev"
-          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,SignInapp2.xml"
-          tenant: ${{ vars.tenant }}
-          clientId: ${{ vars.clientId }}
-          clientSecret: ${{ vars.clientSecret }}
+      - name: Deploy B2C Policy file
+        run: ./artifact/scripts/policy.sh ${{ vars.clientId }} ${{ vars.clientSecret }} ${{ vars.tenant }} B2C_1A_AL_TrustFrameworkBase ./dev/TrustFrameworkBase.xml
+
+      # - name: 'Upload B2C Policy'
+      #   uses: azure-ad-b2c/deploy-trustframework-policy@v3
+      #   with:
+      #     folder: "./dev"
+      #     files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,SignInapp2.xml"
+      #     tenant: ${{ vars.tenant }}
+      #     clientId: ${{ vars.clientId }}
+      #     clientSecret: ${{ vars.clientSecret }}
   qa-deploy:
     runs-on: ubuntu-latest
     environment: qa
