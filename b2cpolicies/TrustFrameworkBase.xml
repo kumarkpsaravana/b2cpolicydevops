@@ -21,7 +21,7 @@
 
       <!-- NOTE: The claims schema contains restrictions on certain claims such as passwords and usernames. 
            The trust framework policy treats Azure AD as any other claims provider and all its restrictions 
-           are modelled in the policy. A policy could be modified to add more restrictions, or use another 
+           are modelled in the policy. A policy coul   d be modified to add more restrictions, or use another 
            claims provider for credential storage which will have its own restrictions. -->
 
       <!-- SECTION I: Claims required for user journeys to work properly -->
